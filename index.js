@@ -7,12 +7,19 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
+
+var corsOptions = {
+    origin: 'localhost:3000',
+    opstionsSuccessStatus: 200
+}
 //DB
 mongoose.connect('mongodb://localhost:auth/auth', {useNewUrlParser: true});
 //APP
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
+app.use(cors());
 router(app);
 
 //Server
